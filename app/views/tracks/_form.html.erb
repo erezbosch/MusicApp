@@ -1,0 +1,46 @@
+<% use_method = track.persisted? ? "patch" : "post" %>
+<% dest_url = track.persisted? ? track_url(track) : tracks_url %>
+
+<form action=<%= dest_url %> method="post">
+  <input type="hidden" name="_method" value=<%= use_method %>>
+  <%= auth_token %>
+  <label for="track_name">track name</label>
+  <input type="text"
+         id="track_name"
+         name="track[name]"
+         value="<%= track.name %>"
+         >
+  <br>
+
+  <label for="track_album_id">album</label>
+  <select name="track[album_id]", id="track_album_id">
+    <%= render partial: "album",
+               collection: Album.all,
+               locals: { default_album_id: track.album_id },
+               as: :album %>
+  </select>
+  <br>
+
+  <label for="track_is_regular">regular</label>
+  <input type="radio"
+         name="track[is_bonus]"
+         id="track_is_regular"
+         value=false
+         <%= "checked" unless track.is_bonus %>
+         >
+
+ <label for="track_is_bonus">bonus</label>
+ <input type="radio"
+        name="track[is_bonus]"
+        id="track_is_bonus"
+        value=true
+        <%= "checked" if track.is_bonus %>
+        >
+
+  <label for="track_lyrics">lyrics</label>
+  <textarea name="track[lyrics]" id="track_lyrics">
+    <%= track.lyrics %>
+  </textarea>
+  
+  <input type="submit">
+</form>

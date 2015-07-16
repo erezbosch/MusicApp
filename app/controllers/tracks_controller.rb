@@ -13,7 +13,7 @@ class TracksController < ApplicationController
       redirect_to track_url(@track)
     else
       flash[:errors] = @track.errors.full_messages
-      redirect_to new_track_url
+      redirect_to new_album_track_url(params[:track][:album_id])
     end
   end
 

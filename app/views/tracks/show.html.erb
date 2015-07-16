@@ -1,0 +1,17 @@
+<h2><%= @track.name %></h2>
+<% if @track.is_bonus %>
+  <p>bonus track</p>
+<% end %>
+Lyrics: <%= @track.lyrics %>
+<h3><%= @track.album.name %></h3>
+<h4><%= @track.band.name %></h4>
+<%= link_to "edit", edit_track_url(@track) %>
+<br>
+<%= link_to "delete", track_url(@track), method: :delete %>
+<br>
+<%= link_to "all tracks on #{@track.album.name}", album_url(@track.album) %>
+<br>
+<%= link_to "all albums by #{@track.band.name}", band_url(@track.band) %>
+<br>
+<%= link_to "all tracks", tracks_url %>
+<br>

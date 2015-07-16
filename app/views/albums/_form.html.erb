@@ -4,7 +4,7 @@
 <form action=<%= dest_url %> method="post">
   <input type="hidden" name="_method" value=<%= use_method %>>
   <%= auth_token %>
-  <label for="album_name">Album name</label>
+  <label for="album_name">album name</label>
   <input type="text"
          id="album_name"
          name="album[name]"
@@ -12,7 +12,7 @@
          >
   <br>
 
-  <label for="album_band_id">Band</label>
+  <label for="album_band_id">band</label>
   <select name="album[band_id]", id="album_band_id">
     <%= render partial: "band",
                collection: Band.all,

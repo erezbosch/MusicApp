@@ -13,7 +13,7 @@ class AlbumsController < ApplicationController
       redirect_to album_url(@album)
     else
       flash[:errors] = @album.errors.full_messages
-      redirect_to new_album_url
+      redirect_to new_band_album_url(params[:album][:band_id])
     end
   end
 

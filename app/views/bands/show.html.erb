@@ -1,7 +1,12 @@
 <h2><%= @band.name %></h2>
-<%= link_to "edit", edit_band_url(@band) %>
-<%= link_to "delete", band_url(@band), method: :delete %>
-<%= link_to "band index", bands_url %>
-<%= link_to "add an album", new_band_album_url(@band) %>
+
 <h3>albums</h3>
 <%= render partial: "album", collection: @band.albums, as: :album %>
+<br>
+<%= link_to "edit", edit_band_url(@band) %>
+<br>
+<%= link_to "delete", band_url(@band), method: :delete %>
+<br>
+<%= link_to "band index", bands_url %>
+<br>
+<%= link_to "add an album", new_band_album_url(@band) %>

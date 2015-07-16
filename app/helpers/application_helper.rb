@@ -12,7 +12,7 @@ module ApplicationHelper
 
   def session_interaction_options
     if current_user
-      html = "welcome, #{current_user.email}! "
+      html = "welcome, #{h(current_user.email)}! "
       html += link_to "sign out", session_url, method: :delete
     else
       html = <<-HTML
