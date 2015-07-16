@@ -5,14 +5,15 @@ class User < ActiveRecord::Base
   validates :password, length: { minimum: 6, allow_nil: true }
   attr_reader :password
 
-  def self.find_by_credentials(email, password)
-    user = User.find_by(email: email)
-    return user if user && user.is_password?(password)
+  def self.find_by_credentials(credentials)
+    user = User.find_by(email: credentials[:email])
+    return user if user && user.is_password?(credentials[:password])
     nil
   end
 
   def reset_session_token!
     self.session_token = generate_session_token
+    save!
   end
 
   def password=(pwd)
