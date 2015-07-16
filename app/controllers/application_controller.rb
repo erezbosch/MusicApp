@@ -20,5 +20,13 @@ class ApplicationController < ActionController::Base
     params.require(:user).permit(:email, :password)
   end
 
-  helper_method [:current_user, :logged_in]
+  def redirect_unless_logged_in
+    redirect_to new_session_url unless logged_in?
+  end
+
+  def redirect_if_logged_in
+    redirect_to bands_url if logged_in?
+  end
+
+  helper_method [:current_user, :logged_in?]
 end
