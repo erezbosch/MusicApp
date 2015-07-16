@@ -2,7 +2,11 @@
 <% if @track.is_bonus %>
   <p>bonus track</p>
 <% end %>
-<%= "lyrics: #{@track.lyrics}" unless @track.lyrics.blank? %>
+<% unless @track.lyrics.blank? %>
+  lyrics:
+  <br>
+  <%= ugly_lyrics(@track.lyrics) %>
+<% end %> 
 <h3><%= @track.album.name %></h3>
 <h4><%= @track.band.name %></h4>
 <%= link_to "edit", edit_track_url(@track) %>

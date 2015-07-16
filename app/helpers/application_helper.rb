@@ -1,4 +1,6 @@
 module ApplicationHelper
+  include ERB::Util
+
   def auth_token
     html  = <<-HTML
       <input type='hidden'
