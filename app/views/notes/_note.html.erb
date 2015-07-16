@@ -1,4 +1,6 @@
 <h4>note by <%= note.user.email %></h4>
 <%= note.text.slice(0, 1000) %>
-<%= link_to "delete", note_url(note), method: :delete %>
+<% if current_user == note.user %>
+  <%= link_to "delete", note_url(note), method: :delete %>
+<% end %>
 </br>
