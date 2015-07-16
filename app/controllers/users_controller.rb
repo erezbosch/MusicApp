@@ -1,5 +1,4 @@
 class UsersController < ApplicationController
-  before_action :redirect_if_logged_in, except: :show
   def new
     @user = User.new
     render :new
@@ -8,6 +7,8 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
+      message = Notification.activation(@user)
+      message.deliver_now
       log_in_user!(@user)
       redirect_to bands_url
     else
@@ -19,5 +20,9 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     render :show
+  end
+
+  def activate
+
   end
 end

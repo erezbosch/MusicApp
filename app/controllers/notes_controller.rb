@@ -1,5 +1,6 @@
 class NotesController < ApplicationController
   before_action :ensure_destroy_targets_own_note, only: :destroy
+  
   def destroy
     @note = Note.find(params[:id])
     @track = @note.track
