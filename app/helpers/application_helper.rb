@@ -12,12 +12,12 @@ module ApplicationHelper
 
   def session_interaction_options
     if current_user
-      html = "Welcome, #{current_user.email}! "
-      html += link_to "Sign out", session_url, method: :delete
+      html = "welcome, #{current_user.email}! "
+      html += link_to "sign out", session_url, method: :delete
     else
       html = <<-HTML
-        <a href='#{new_user_url}'>Sign up</a>
-        <a href='#{new_session_url}'>Sign in</a>
+        <a href='#{new_user_url}'>sign up</a>
+        <a href='#{new_session_url}'>sign in</a>
       HTML
     end
     html.html_safe

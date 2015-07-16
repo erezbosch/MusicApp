@@ -1,0 +1,41 @@
+<% use_method = album.persisted? ? "patch" : "post" %>
+<% dest_url = album.persisted? ? album_url(album) : albums_url %>
+
+<form action=<%= dest_url %> method="post">
+  <input type="hidden" name="_method" value=<%= use_method %>>
+  <%= auth_token %>
+  <label for="album_name">Album name</label>
+  <input type="text"
+         id="album_name"
+         name="album[name]"
+         value="<%= album.name %>"
+         >
+  <br>
+
+  <label for="album_band_id">Band</label>
+  <select name="album[band_id]", id="album_band_id">
+    <%= render partial: "band",
+               collection: Band.all,
+               locals: { default_band_id: album.band_id },
+               as: :band %>
+  </select>
+  <br>
+
+  <label for="album_is_live">live</label>
+  <input type="radio"
+         name="album[is_live]"
+         id="album_is_live"
+         value=true
+         <%= "checked" if album.is_live %>
+         >
+
+ <label for="album_is_not_live">studio</label>
+ <input type="radio"
+        name="album[is_live]"
+        id="album_is_not_live"
+        value=false
+        <%= "checked" unless album.is_live %>
+        >
+
+  <input type="submit">
+</form>

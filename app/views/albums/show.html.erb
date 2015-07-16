@@ -1,0 +1,6 @@
+<h2><%= @album.name %></h2>
+<h4><%= @album.band.name %></h2>
+<%= link_to "edit", edit_album_url(@album) %>
+<%= link_to "delete", album_url(@album), method: :delete %>
+<%= link_to "all albums by #{@album.band.name}", band_url(@album.band) %>
+<%= link_to "add a track", new_album_track_url(@album) %>

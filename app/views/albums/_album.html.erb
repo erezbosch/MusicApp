@@ -1,0 +1,6 @@
+<%= link_to album.name, album_url(album) %>
+by
+<%= link_to album.band.name, band_url(album.band) %>
+<%= link_to "edit", edit_album_url(album) %>
+<%= link_to "delete", album_url(album), method: :delete %>
+<br>

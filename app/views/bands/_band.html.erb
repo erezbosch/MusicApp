@@ -1,4 +1,4 @@
-<%= band.name %>
+<%= link_to band.name, band_url(band) %>
 <%= link_to "edit", edit_band_url(band) %>
 <%= link_to "delete", band_url(band), method: :delete %>
 <br>
