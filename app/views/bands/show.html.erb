@@ -3,3 +3,5 @@
 <%= link_to "delete", band_url(@band), method: :delete %>
 <%= link_to "band index", bands_url %>
 <%= link_to "add an album", new_band_album_url(@band) %>
+<h3>albums</h3>
+<%= render partial: "album", collection: @band.albums, as: :album %>
