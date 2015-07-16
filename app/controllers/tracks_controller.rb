@@ -34,7 +34,7 @@ class TracksController < ApplicationController
 
   def update
     @track = Track.find(params[:id])
-    if @track.update(Track_params)
+    if @track.update(track_params)
       redirect_to track_url(@track)
     else
       flash[:errors] = @track.errors.full_messages
@@ -52,9 +52,21 @@ class TracksController < ApplicationController
     end
   end
 
+  def add_note
+    @track = Track.find(params[:id])
+    @note = current_user.notes.new(note_params)
+    @note.track_id = @track.id
+    flash[:errors] = ["Invalid note"] unless @note.save
+    redirect_to track_url(@track)
+  end
+
   private
 
   def track_params
     params.require(:track).permit(:name, :album_id, :is_bonus, :lyrics)
+  end
+
+  def note_params
+    params.require(:note).permit(:text)
   end
 end
