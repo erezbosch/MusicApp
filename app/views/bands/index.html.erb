@@ -2,4 +2,6 @@
 
 <%= render @bands %>
 <br>
-<a href=<%= new_band_url %>>add a band</a>
+<% if current_user.admin %>
+  <a href=<%= new_band_url %>>add a band</a>
+<% end %>

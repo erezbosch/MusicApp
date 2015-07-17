@@ -3,10 +3,12 @@
 <h3>albums</h3>
 <%= render partial: "album", collection: @band.albums, as: :album %>
 <br>
-<%= link_to "edit", edit_band_url(@band) %>
-<br>
-<%= link_to "delete", band_url(@band), method: :delete %>
-<br>
+<% if current_user.admin %>
+  <%= link_to "edit", edit_band_url(@band) %>
+  <br>
+  <%= link_to "delete", band_url(@band), method: :delete %>
+  <br>
+<% end %>
 <%= link_to "band index", bands_url %>
 <br>
 <%= link_to "add an album", new_band_album_url(@band) %>

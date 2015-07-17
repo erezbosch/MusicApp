@@ -1,5 +1,7 @@
 class TracksController < ApplicationController
   before_action :redirect_unless_logged_in
+  before_action :disallow_modifications_from_nonadmins,
+                except: [:index, :show, :add_note]
 
   def new
     @track = Track.new

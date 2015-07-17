@@ -6,13 +6,15 @@
   lyrics:
   <br>
   <%= ugly_lyrics(@track.lyrics) %>
-<% end %> 
+<% end %>
 <h3><%= @track.album.name %></h3>
 <h4><%= @track.band.name %></h4>
-<%= link_to "edit", edit_track_url(@track) %>
-<br>
-<%= link_to "delete", track_url(@track), method: :delete %>
-<br>
+<% if current_user.admin %>
+  <%= link_to "edit", edit_track_url(@track) %>
+  <br>
+  <%= link_to "delete", track_url(@track), method: :delete %>
+  <br>
+<% end %>
 <%= link_to "all tracks on #{@track.album.name}", album_url(@track.album) %>
 <br>
 <%= link_to "all albums by #{@track.band.name}", band_url(@track.band) %>

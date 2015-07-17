@@ -1,4 +1,6 @@
 <%= link_to summarize_track(track), track_url(track) %>
-<%= link_to "edit", edit_track_url(track) %>
-<%= link_to "delete", track_url(track), method: :delete %>
+<% if current_user.admin %>
+  <%= link_to "edit", edit_track_url(track) %>
+  <%= link_to "delete", track_url(track), method: :delete %>
+<% end %>
 <br>

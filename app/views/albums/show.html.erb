@@ -4,10 +4,12 @@
 <h3>tracks</h3>
 <%= render partial: "track", collection: @album.tracks, as: :track %>
 <br>
-<%= link_to "edit", edit_album_url(@album) %>
-<br>
-<%= link_to "delete", album_url(@album), method: :delete %>
-<br>
+<% if current_user.admin %>
+  <%= link_to "edit", edit_album_url(@album) %>
+  <br>
+  <%= link_to "delete", album_url(@album), method: :delete %>
+  <br>
+<% end %>
 <%= link_to "all albums by #{@album.band.name}", band_url(@album.band) %>
 <br>
 <%= link_to "all albums", albums_url %>

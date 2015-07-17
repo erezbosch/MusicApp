@@ -1,5 +1,6 @@
 class BandsController < ApplicationController
   before_action :redirect_unless_logged_in
+  before_action :disallow_modifications_from_nonadmins, except: [:index, :show]
 
   def new
     @band = Band.new

@@ -3,6 +3,8 @@ on
 <%= link_to track.album.name, album_url(track.album) %>
 by
 <%= link_to track.band.name, band_url(track.band) %>
-<%= link_to "edit", edit_track_url(track) %>
-<%= link_to "delete", track_url(track), method: :delete %>
+<% if current_user.admin %>
+  <%= link_to "edit", edit_track_url(track) %>
+  <%= link_to "delete", track_url(track), method: :delete %>
+<% end %>
 <br>

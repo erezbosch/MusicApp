@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
   validates :email, :session_token, :activation_token, uniqueness: true
   validates :password, length: { minimum: 6, allow_nil: true }
 
-  has_many :notes
+  has_many :notes, dependent: :destroy
 
   attr_reader :password
 

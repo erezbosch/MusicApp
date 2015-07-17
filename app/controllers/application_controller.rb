@@ -28,5 +28,9 @@ class ApplicationController < ActionController::Base
     redirect_to bands_url if logged_in?
   end
 
+  def disallow_modifications_from_nonadmins
+    render text: "403 FORBIDDEN" unless current_user.admin
+  end
+
   helper_method [:current_user, :logged_in?]
 end

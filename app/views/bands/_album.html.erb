@@ -1,4 +1,6 @@
 <%= link_to summarize(album), album_url(album) %>
-<%= link_to "edit", edit_album_url(album) %>
-<%= link_to "delete", album_url(album), method: :delete %>
+<% if current_user.admin %>
+  <%= link_to "edit", edit_album_url(album) %>
+  <%= link_to "delete", album_url(album), method: :delete %>
+<% end %>
 <br>
