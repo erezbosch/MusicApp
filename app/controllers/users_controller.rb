@@ -1,7 +1,33 @@
 class UsersController < ApplicationController
+  before_action :disallow_modifications_from_nonadmins, only: [:index,
+                                                               :destroy,
+                                                               :toggle_admin
+                                                               ]
+
   def new
     @user = User.new
     render :new
+  end
+
+  def index
+    @users = User.all
+    render :index
+  end
+
+  def destroy
+    @user = User.find(params[:id])
+    if !@user.admin && @user.destroy
+      redirect_to users_url
+    else
+      flash[:errors] = ["you can't destroy this user!"]
+      redirect_to user_url(@user)
+    end
+  end
+
+  def toggle_admin
+    @user = User.find(params[:id])
+    @user.toggle!(:admin)
+    redirect_to users_url
   end
 
   def create

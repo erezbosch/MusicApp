@@ -1,1 +1,5 @@
 <h2><%= @user.email %></h2>
+<br>
+<%= user_admin_tools(@user) %>
+<a href=<%= bands_url %>>band index</a>
+<%= link_to "user index", users_url if current_user.admin %>

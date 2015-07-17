@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
-  resources :users, only: [:new, :create, :show] do
+  resources :users, except: [:edit, :update] do
     get 'activate', on: :collection
+    get 'toggle_admin', on: :member
   end
 
   resource :session, only: [:new, :create, :destroy]

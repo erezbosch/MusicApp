@@ -1,0 +1,4 @@
+<%= link_to user.email, user_url(user) %>
+<%= "(admin)" if user.admin %>
+<%= user_admin_tools(user) %>
+<br>
