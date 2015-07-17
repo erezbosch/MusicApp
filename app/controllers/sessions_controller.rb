@@ -8,9 +8,12 @@ class SessionsController < ApplicationController
 
   def create
     @user = User.find_by_credentials(user_params)
-    if @user
+    if @user && @user.activated
       log_in_user!(@user)
       redirect_to bands_url
+    elsif @user
+      flash[:errors] = ["Activate your acccount before logging in!"]
+      redirect_to new_session_url
     else
       flash[:errors] = ["Incorrect email or password"]
       redirect_to new_session_url

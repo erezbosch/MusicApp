@@ -1,7 +1,8 @@
 class User < ActiveRecord::Base
   before_validation :ensure_session_token
+  before_validation :ensure_activation_token
   validates :email, :password_digest, :session_token, presence: true
-  validates :email, uniqueness: true
+  validates :email, :session_token, :activation_token, uniqueness: true
   validates :password, length: { minimum: 6, allow_nil: true }
 
   has_many :notes
@@ -15,7 +16,7 @@ class User < ActiveRecord::Base
   end
 
   def reset_session_token!
-    self.session_token = generate_session_token
+    self.session_token = generate_token
     save!
   end
 
@@ -30,11 +31,15 @@ class User < ActiveRecord::Base
 
   private
 
-  def generate_session_token
+  def generate_token
     SecureRandom.urlsafe_base64
   end
 
   def ensure_session_token
-    self.session_token ||= generate_session_token
+    self.session_token ||= generate_token
+  end
+
+  def ensure_activation_token
+    self.activation_token ||= generate_token
   end
 end

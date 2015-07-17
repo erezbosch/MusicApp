@@ -9,8 +9,7 @@ class UsersController < ApplicationController
     if @user.save
       message = Notification.activation(@user)
       message.deliver_now
-      log_in_user!(@user)
-      redirect_to bands_url
+      redirect_to new_session_url
     else
       flash[:errors] = @user.errors.full_messages
       redirect_to new_user_url
@@ -23,6 +22,13 @@ class UsersController < ApplicationController
   end
 
   def activate
-
+    @user = User.find_by(activation_token: params[:activation_token])
+    @user.toggle!(:activated) if @user
+    if @user.activated
+      log_in_user!(@user)
+      redirect_to bands_url
+    else
+      redirect_to new_user_url
+    end
   end
 end
